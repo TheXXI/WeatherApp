@@ -1,0 +1,13 @@
+disabled_rules:
+- trailing_whitespace
+
+line_length:
+- 230 #warning
+- 300 #error
+
+identifier_name:
+  min_length: # only min_length
+    error: 3 # only error
+  excluded: # excluded via string array
+    - id
+    - dt
