@@ -19,7 +19,11 @@ enum ApiType {
     var request: URLRequest {
         switch self {
         case .coords(city: let city):
+<<<<<<< HEAD:WeatherApp/Network/ApiManager.swift
             let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=" + city  + "&limit=5&appid=" + apikey)
+=======
+            let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=" + city  + "&appid=abe768f4f95a06831a1056b7b93f3d3f")
+>>>>>>> 18d0ff1c05fea3eba5cbf2742db3e3757353609f:WeatherApp/ApiManager.swift
             let request = URLRequest(url: url!)
             return request
         case .weather(latCoord: let latCoord, lonCoord: let lonCoord):
