@@ -1,5 +1,10 @@
 disabled_rules:
 - trailing_whitespace
+- force_cast
+- comment_spacing
+
+function_parameter_count:
+- 6 #werning
 
 line_length:
 - 230 #warning
@@ -11,3 +16,4 @@ identifier_name:
   excluded: # excluded via string array
     - id
     - dt
+
