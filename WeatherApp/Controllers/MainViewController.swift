@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        view.backgroundColor = .lightGray
         
         addCoordOnFirstLaunch()
         setupPageController()
@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
         
         self.pageController?.dataSource = self
         self.pageController?.delegate = self
-            
+        
         self.pageController?.view.backgroundColor = .clear
         self.pageController?.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         self.addChild(self.pageController!)
