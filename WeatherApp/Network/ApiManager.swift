@@ -20,6 +20,7 @@ enum ApiType {
         switch self {
         case .coords(city: let city):
             let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=" + city  + "&limit=5&appid=" + apikey)
+            print(url)
             let request = URLRequest(url: url!)
             return request
         case .weather(latCoord: let latCoord, lonCoord: let lonCoord):

@@ -72,7 +72,7 @@ class CurrentView: UIView {
     
     public func configure (model: Current) {
         tempLabel.text = "\(NumberFormatter.double(number: model.temp!)) °C"
-        feelsLikeLabel.text = "Feels like: \(NumberFormatter.double(number: model.feelsLike!)) °C"
+        feelsLikeLabel.text = "Ощущается: \(NumberFormatter.double(number: model.feelsLike!)) °C"
         weatherIconImageView.image = UIImage(named: model.weather![0].icon!)
         weatherTextLabel.text = model.weather![0].main
     }

@@ -10,7 +10,6 @@ import UIKit
 class MainViewController: UIViewController {
     
     // MARK: - Private properties
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     private var coords = [CoordsEntity]()
     private var weather = [WeatherData]()
@@ -20,25 +19,51 @@ class MainViewController: UIViewController {
     private var currentIndex: Int = 0
     
     // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
         
         addCoordOnFirstLaunch()
         setupPageController()
         
     }
     
-    // MARK: - Private methods
-    private func addCoordOnFirstLaunch() {
-        getAllCoords()
-        if coords.isEmpty {
-            addCoord(name: "Moscow", lat: 55.7504461, lon: 37.6174943, nameRu: "Москва", state: "Moscow", country: "RU")
-            addCoord(name: "Saint Petersburg", lat: 59.938732, lon: 30.316229, nameRu: "Санкт-Петербург", state: "Saint Petersburg", country: "RU")
+    // MARK: - Public methods
+    
+    public func reloadPageController () {
+        coords.removeAll()
+        controllers.removeAll()
+        self.pageController?.dataSource = nil
+        coords = CoreDataFunctions().getAllCoords()
+        print(coords.count)
+        for coord in coords {
+            let viewController = WeatherViewController()
+            viewController.coord = coord
+            controllers.append(viewController)
         }
+        self.pageController?.dataSource = self
+        self.pageController?.setViewControllers([controllers[0]], direction: .forward, animated: false, completion: nil)
+    }
+    
+    // MARK: - Private methods
+    
+    private func addCoordOnFirstLaunch() {
+        coords = CoreDataFunctions().getAllCoords()
+        //getAllCoords()
+        if coords.isEmpty {
+            CoreDataFunctions().addCoord(name: "Moscow", lat: 55.7504461, lon: 37.6174943, nameRu: "Москва", state: "Moscow", country: "RU")
+            CoreDataFunctions().addCoord(name: "Saint Petersburg", lat: 59.938732, lon: 30.316229, nameRu: "Санкт-Петербург", state: "Saint Petersburg", country: "RU")
+            /*CoreDataFunctions().addCoord(name: "Moscow", lat: 55.7504461, lon: 37.6174943, nameRu: "Москва", state: "Moscow", country: "RU")
+            CoreDataFunctions().addCoord(name: "Saint Petersburg", lat: 59.938732, lon: 30.316229, nameRu: "Санкт-Петербург", state: "Saint Petersburg", country: "RU")*/
+            coords = CoreDataFunctions().getAllCoords()
+            
+        }
+        //getAllCoords()
     }
     
     // MARK: - Configure UIPageController
+    
     private func setupPageController() {
         self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
@@ -55,6 +80,10 @@ class MainViewController: UIViewController {
         self.pageController?.setViewControllers([controllers[0]], direction: .forward, animated: false, completion: nil)
         
         self.pageController?.didMove(toParent: self)
+        
+        let pageControl: UIPageControl = UIPageControl.appearance(whenContainedInInstancesOf: [MainViewController.self])
+        pageControl.pageIndicatorTintColor = UIColor.lightGray
+        pageControl.currentPageIndicatorTintColor = UIColor.black
     }
     
     private func setPages() {
@@ -66,7 +95,8 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Core Data functions
-    private func getAllCoords() {
+    /*private func getAllCoords() {
+        coords.removeAll()
         do {
             coords = try context.fetch(CoordsEntity.fetchRequest())
         } catch {
@@ -96,11 +126,12 @@ class MainViewController: UIViewController {
         } catch {
             
         }
-    }
+    }*/
 
 }
 
 // MARK: - PageViewControllerDataSource/Delegate
+
 extension MainViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -134,5 +165,11 @@ extension MainViewController: UIPageViewControllerDelegate, UIPageViewController
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return currentIndex
+    }
+}
+
+extension UIResponder {
+    public var parentViewController: UIViewController? {
+        return next as? UIViewController ?? next?.parentViewController
     }
 }

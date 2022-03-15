@@ -32,7 +32,7 @@ class WeatherView: UIView {
         activity = UIActivityIndicatorView()
         addSubview(activity)
         setActivityViewConstraints()
-        activity.startAnimating()
+        //activity.startAnimating()
         
         createHourlyCollectionView()
     }

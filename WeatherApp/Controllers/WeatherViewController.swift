@@ -59,6 +59,10 @@ typealias RootView = WeatherView
     // MARK: - Actions
     
     @objc func btnCitesListAction(sender: UIButton!) {
-            
-        }
+        let rootViewController = CitiesListViewController()
+        rootViewController.title = "Список городов"
+        let navigationController = UINavigationController(rootViewController: rootViewController)
+        present(navigationController, animated: true)
+        //self.navigationController?.push(rootViewController, animated: true)
+    }
 }
