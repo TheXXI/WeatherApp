@@ -107,23 +107,23 @@ class WeatherView: UIView {
                 currentDetailsView.setTitle()
             case 1: //УФ-индекс
                 let value: String = String((weatherDataModel?.current?.uvi)!)
-                currentDetailsView.configure(title: "УФ-индекс:", value: value)
+                currentDetailsView.configure(title: "UV index:", value: value)
             case 2: //Ветер
-                let value: String = "\((weatherDataModel?.current?.windSpeed)!) м/с (доделать)"
-                currentDetailsView.configure(title: "Ветер:", value: value)
+                let value: String = "\((weatherDataModel?.current?.windSpeed)!) m/s (доделать)"
+                currentDetailsView.configure(title: "Wind:", value: value)
             case 3: //Влажность
                 let value: String = "\((weatherDataModel?.current?.humidity)!)%"
-                currentDetailsView.configure(title: "Влажность:", value: value)
+                currentDetailsView.configure(title: "Humidity:", value: value)
             case 4: //Давление
                 let pressure = Double((weatherDataModel?.current?.pressure)!) * 0.75
-                let value: String = "\(NSString(format: "%.0f", round(pressure))) мм рт. ст."
-                currentDetailsView.configure(title: "Давление:", value: value)
+                let value: String = "\(NSString(format: "%.0f", round(pressure))) mmHg"
+                currentDetailsView.configure(title: "Pressure:", value: value)
             case 5: //Восход
                 let value = TimeFormatter.getTime(format: "HH:mm", unixtime: (weatherDataModel?.current?.sunrise)!)
-                currentDetailsView.configure(title: "Восход:", value: value)
+                currentDetailsView.configure(title: "Sunrise:", value: value)
             case 6: //Закат
                 let value = TimeFormatter.getTime(format: "HH:mm", unixtime: (weatherDataModel?.current?.sunset)!)
-                currentDetailsView.configure(title: "Закат:", value: value)
+                currentDetailsView.configure(title: "Sunset:", value: value)
             default:
                 break
             }
@@ -228,6 +228,8 @@ class WeatherView: UIView {
     }
 
 }
+
+// MARK: - UICollectionViewDataSource/Delegate
 
 extension WeatherView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

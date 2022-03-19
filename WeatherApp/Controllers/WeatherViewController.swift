@@ -37,9 +37,9 @@ typealias RootView = WeatherView
     
     private func checkStateAndCity() -> String {
         if coord?.state == coord?.name {
-            return "\(coord!.nameRu ?? ""), \(coord!.country ?? "")"
+            return "\(coord!.name ?? ""), \(coord!.country ?? "")"
         } else {
-            return "\(coord!.nameRu ?? ""), \(coord!.state ?? ""), \(coord!.country ?? "")"
+            return "\(coord!.name ?? ""), \(coord!.state ?? ""), \(coord!.country ?? "")"
         }
     }
 
@@ -60,9 +60,8 @@ typealias RootView = WeatherView
     
     @objc func btnCitesListAction(sender: UIButton!) {
         let rootViewController = CitiesListViewController()
-        rootViewController.title = "Список городов"
+        rootViewController.title = "List of cities"
         let navigationController = UINavigationController(rootViewController: rootViewController)
         present(navigationController, animated: true)
-        //self.navigationController?.push(rootViewController, animated: true)
     }
 }

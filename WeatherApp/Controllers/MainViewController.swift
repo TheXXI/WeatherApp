@@ -34,15 +34,12 @@ class MainViewController: UIViewController {
     public func reloadPageController () {
         coords.removeAll()
         controllers.removeAll()
-        self.pageController?.dataSource = nil
         coords = CoreDataFunctions().getAllCoords()
-        print(coords.count)
         for coord in coords {
             let viewController = WeatherViewController()
             viewController.coord = coord
             controllers.append(viewController)
         }
-        self.pageController?.dataSource = self
         self.pageController?.setViewControllers([controllers[0]], direction: .forward, animated: false, completion: nil)
     }
     
@@ -54,8 +51,9 @@ class MainViewController: UIViewController {
         if coords.isEmpty {
             CoreDataFunctions().addCoord(name: "Moscow", lat: 55.7504461, lon: 37.6174943, nameRu: "Москва", state: "Moscow", country: "RU")
             CoreDataFunctions().addCoord(name: "Saint Petersburg", lat: 59.938732, lon: 30.316229, nameRu: "Санкт-Петербург", state: "Saint Petersburg", country: "RU")
-            /*CoreDataFunctions().addCoord(name: "Moscow", lat: 55.7504461, lon: 37.6174943, nameRu: "Москва", state: "Moscow", country: "RU")
-            CoreDataFunctions().addCoord(name: "Saint Petersburg", lat: 59.938732, lon: 30.316229, nameRu: "Санкт-Петербург", state: "Saint Petersburg", country: "RU")*/
+            CoreDataFunctions().addCoord(name: "Moscow", lat: 55.7504461, lon: 37.6174943, nameRu: "Москва", state: "Moscow", country: "RU")
+            CoreDataFunctions().addCoord(name: "Saint Petersburg", lat: 59.938732, lon: 30.316229, nameRu: "Санкт-Петербург", state: "Saint Petersburg", country: "RU")
+            
             coords = CoreDataFunctions().getAllCoords()
             
         }
@@ -130,7 +128,7 @@ class MainViewController: UIViewController {
 
 }
 
-// MARK: - PageViewControllerDataSource/Delegate
+// MARK: - Extension PageViewControllerDataSource/Delegate
 
 extension MainViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
@@ -165,11 +163,5 @@ extension MainViewController: UIPageViewControllerDelegate, UIPageViewController
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return currentIndex
-    }
-}
-
-extension UIResponder {
-    public var parentViewController: UIViewController? {
-        return next as? UIViewController ?? next?.parentViewController
     }
 }

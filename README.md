@@ -4,7 +4,6 @@
  ![](https://github.com/TheXXI/WheatherApp/blob/main/WheatherApp%20Screenshot%201.png)
 
 # Used in the project
-- MVC
 - CoreData
 - UIPageViewController
 - SwiftLint

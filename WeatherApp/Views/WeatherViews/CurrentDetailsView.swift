@@ -62,7 +62,7 @@ class CurrentDetailsView: UIView {
     }
     
     public func setTitle () {
-        titleLabel.text = "Информация на сегодня"
+        titleLabel.text = "Information for today"
         titleLabel.font = UIFont.systemFont(ofSize: 24.0)
         
     }
