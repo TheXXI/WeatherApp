@@ -1,7 +1,7 @@
 # Weather App
 
 # Screenshots
- ![](https://github.com/TheXXI/WheatherApp/blob/main/WheatherApp%20Screenshot%201.png)
+ ![](https://github.com/TheXXI/WeatherApp/blob/main/WheatherApp%20Screenshot%201.png)
 
 # Used in the project
 - CoreData
